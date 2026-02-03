@@ -8,15 +8,6 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-const PORT = process.env.PORT || 3000;
-
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
-
-
 let questions = [];
 try {
     const questionsData = fs.readFileSync(path.join(__dirname, 'questions.json'), 'utf8');
@@ -349,9 +340,18 @@ io.on('connection', (socket) => {
     });
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
-const PORT = 3000;
-server.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
+// const PORT = 3000;
+// server.listen(PORT, () => {
+//     console.log(`Server listening on http://localhost:${PORT}`);
+// });
+
 });
+
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
